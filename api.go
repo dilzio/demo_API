@@ -10,6 +10,8 @@ import (
 	"github.com/IBM/sarama"
 )
 
+const KAFKA_CONNECT_URL = "kafka-service.kafka.svc.cluster.local:9092"
+
 // KafkaConfig holds the Kafka configuration.
 type KafkaConfig struct {
 	Brokers []string
@@ -27,10 +29,8 @@ var kafkaConfig KafkaConfig
 
 func initKafka() {
 	kafkaConfig = KafkaConfig{
-		//Brokers: []string{"192.168.194.38:9092"}, // Update with your Kafka broker(s)
-		//Brokers: []string{"10.244.0.20:9092"}, // Update with your Kafka broker(s)
-		Brokers: []string{"kafka-broker.kafka-service.kafka.svc.cluster.local:9092"}, // cluster IP of K8s kafka service not pod
-		Topic:   "my-topic",                                                          // Update with your Kafka topic
+		Brokers: []string{KAFKA_CONNECT_URL},
+		Topic:   "my-topic",
 	}
 
 	// Kafka producer configuration
